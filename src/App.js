@@ -1,24 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import AddForm from './components/AddForm';
+import Box from './components/Box';
 
 function App() {
+
+  
+  const [widthAfterSubmit, setWidthAfterSubmit] = useState(100);
+  const [colors, setColors] = useState([
+    'black', 'red', 'green', 'blue', 'silver'
+  ]);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      
+      <div className="row">
+        <div className="col">
+          <AddForm colors={colors} setColors={setColors} widthAfterSubmit={widthAfterSubmit} setWidthAfterSubmit={setWidthAfterSubmit} />
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col">
+          {
+            colors.map((clr,i) => 
+                <Box colors={colors} setColors={setColors} id={i} key={i} color={clr} widthAfterSubmit={widthAfterSubmit} />
+              )
+          }
+        </div>
+      </div>
+        
     </div>
   );
 }
